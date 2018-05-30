@@ -114,4 +114,8 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(view.getContext(), "Cannot be empty!",Toast.LENGTH_LONG).show();
         }
     }
+
+
+
+
 }
