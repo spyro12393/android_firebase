@@ -1,6 +1,8 @@
 package com.example.jasonjr.appwatch0530;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,12 +17,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     FirebaseAuth.AuthStateListener authListener;
     private String userUID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +63,10 @@ public class LoginActivity extends AppCompatActivity {
         auth.removeAuthStateListener(authListener);
     }
 
+
     // 註冊功能
     private void register(final String email, final String password) {
+        final Intent intent = new Intent(this,RegisterActivity.class);
         new AlertDialog.Builder(LoginActivity.this)
                 .setTitle("登入問題")
                 .setMessage("無此帳號，是否要以此帳號與密碼註冊?")
@@ -67,7 +74,13 @@ public class LoginActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                createUser(email, password);
+                                // createUser(email, password);
+
+                                intent.putExtra("email", email);
+                                intent.putExtra("password", password);
+
+                                finish();
+                                startActivity(intent);
                             }
                         })
                 .setNeutralButton("取消", null)
@@ -87,6 +100,11 @@ public class LoginActivity extends AppCompatActivity {
                                         .setMessage(message)
                                         .setPositiveButton("OK", null)
                                         .show();
+
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference myRef = database.getReference("User");
+
+                                myRef.setValue(userUID);
                             }
                         });
     }
