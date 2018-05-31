@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                                 // createUser(email, password);
 
                                 intent.putExtra("email", email);
-                                intent.putExtra("password", password);
+                                //intent.putExtra("password", password);
 
                                 finish();
                                 startActivity(intent);
@@ -101,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                                         .setPositiveButton("OK", null)
                                         .show();
 
+                                // add into database
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference myRef = database.getReference("User");
 
@@ -109,7 +110,8 @@ public class LoginActivity extends AppCompatActivity {
                         });
     }
 
-    public void login(View view) {
+    // clickLogin
+    public void login(View v) {
         try {
             final String email = ((EditText) findViewById(R.id.email))
                     .getText().toString();
@@ -129,11 +131,16 @@ public class LoginActivity extends AppCompatActivity {
         }
         catch (Exception e)
         {
-            Toast.makeText(view.getContext(), "Cannot be empty!",Toast.LENGTH_LONG).show();
+            Toast.makeText(v.getContext(), "Cannot be empty!",Toast.LENGTH_LONG).show();
         }
     }
 
 
+    public void clickRegister(View view) {
 
+        Intent intent = new Intent(this, RegisterActivity.class);
+        finish();
+        startActivity(intent);
 
+    }
 }

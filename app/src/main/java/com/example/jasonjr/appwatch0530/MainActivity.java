@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -16,13 +19,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*
+
     public void signup(View view) {
-        Intent intent = new Intent(this, SignupActivity.class);
-        // intent.putExtra("BMI_EXTRA", bmi);
-        startActivity(intent);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("User");
+
+        myRef.setValue("Online!");
     }
-    */
+
 
     public void register(View view) {
         Intent intent = new Intent(this, LoginActivity.class);

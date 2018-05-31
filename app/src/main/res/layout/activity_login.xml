@@ -44,4 +44,11 @@
         android:id="@+id/button"
         android:layout_gravity="center_horizontal"
         android:onClick="login" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickRegister"
+        android:text="Register" />
 </LinearLayout>
